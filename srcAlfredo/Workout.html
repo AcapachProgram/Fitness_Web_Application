@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Workout</title>
+        <link rel="stylesheet" href="Workout.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+
+    <style>
+        body {
+            background-color: yellow;
+        }
+        .fit {
+            background-image: url("C:/Users/acapa/OneDrive/GPA-Transcript/Pictures/Fitness.jpeg");
+            background-size: contain;
+        }
+        h1 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 60px;
+            color: rgb(255, 0, 0);
+        }
+        p {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 30px;
+            color: rgb(204, 0, 255);
+        }
+        select {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 20px;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+        }
+        .submit {
+            color: brown;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        #workout, #time, #speed, .submit {
+            background-color: lightblue;
+            border: 2px solid blue;
+            padding: 5px;
+            border-radius: 5px;
+            font: 20px 'Times New Roman', Times, serif;
+            font-weight: bold;
+        }
+        .image-container {
+            position: relative;
+            width: 60%;
+            height: 60%;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+        }
+        .text-overlay {
+            position: absolute;
+            color: black;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .laps {
+            top: 5%;
+            left: 5%;
+        }
+        .calories {
+            top: 5%;
+            right: 5%;
+        }
+        .time {
+            bottom: 5%;
+            left: 5%;
+        }
+        .distance {
+            bottom: 5%;
+            right: 5%;
+        }
+        .speed {
+            bottom: 10%;
+            right: 5%;
+        }
+    </style>
+
+    <body>
+        <div class="fit">
+            <h1>Session</h1>
+        </div>
+
+        <div class="image-container">
+            <img src="C:/Users/acapa/OneDrive/GPA-Transcript/Pictures/Track.jpeg" alt="Track">
+            <div class="text-overlay laps">Laps: <span id="laps">0</span></div>
+            <div class="text-overlay calories">Calories: <span id="calories">0</span></div>
+            <div class="text-overlay time">Time: <span id="time">0</span></div>
+            <div class="text-overlay distance">Distance in miles: <span id="distance">0</span></div>
+            <div class="text-overlay speed">Speed: <span id="speed">0</span> mph</div>
+        </div>
+
+        <form id="calorieTrackerForm">
+            <label for="laps">Laps:</label>
+            <input type="number" id="lapsInput" name="laps" min="0" required>
+            <label for="calories">Calories:</label>
+            <input type="number" id="caloriesInput" name="calories" min="0" required>
+            <label for="speed">Speed (mph):</label>
+            <input type="number" id="speedInput" name="speed" min="0" required>
+            <button type="submit" class="submit">Update</button>
+        </form>
+
+        <script>
+            // Define the calorieTrackerData object
+            const calorieTrackerData = {
+                laps: 0,
+                calories: 0,
+                time: localStorage.getItem('time') || 0,
+                distance: 0,
+                speed: localStorage.getItem('speed') || 0
+            };
+
+            // Function to update calorieTrackerData from form submission
+            function updateCalorieTrackerData(event) {
+                event.preventDefault();
+                if (calorieTrackerData.time > 0) {
+                    const formData = new FormData(event.target);
+                    calorieTrackerData.laps = parseInt(formData.get('laps'));
+                    calorieTrackerData.calories += parseInt(formData.get('calories'));
+                    calorieTrackerData.speed = parseInt(formData.get('speed'));
+                    document.getElementById('laps').textContent = calorieTrackerData.laps;
+                    document.getElementById('calories').textContent = calorieTrackerData.calories;
+                    document.getElementById('speed').textContent = calorieTrackerData.speed;
+                } else {
+                    alert("Time must be greater than 0 to update speed.");
+                }
+            }
+
+            // Add event listener to form submission
+            document.getElementById('calorieTrackerForm').addEventListener('submit', updateCalorieTrackerData);
+
+            // Function to gradually increase the values of laps, calories, and distance
+            function incrementValues() {
+                if (calorieTrackerData.time > 0) {
+                    calorieTrackerData.laps += calorieTrackerData.speed / 10;
+                    calorieTrackerData.calories += calorieTrackerData.speed % 10;
+                    calorieTrackerData.distance += calorieTrackerData.speed / 4;
+                    document.getElementById('laps').textContent = calorieTrackerData.laps.toFixed(2);
+                    document.getElementById('calories').textContent = calorieTrackerData.calories;
+                    document.getElementById('distance').textContent = calorieTrackerData.distance.toFixed(2);
+                    calorieTrackerData.time -= 1;
+                    document.getElementById('time').textContent = calorieTrackerData.time;
+                }
+            }
+
+            // Update the HTML with the CalorieTracker data
+            document.getElementById('laps').textContent = calorieTrackerData.laps;
+            document.getElementById('calories').textContent = calorieTrackerData.calories;
+            document.getElementById('time').textContent = calorieTrackerData.time;
+            document.getElementById('distance').textContent = calorieTrackerData.distance;
+            document.getElementById('speed').textContent = calorieTrackerData.speed;
+
+            // Call the incrementValues function every second
+            setInterval(incrementValues, 1000);
+        </script>
+    </body>
+</html>

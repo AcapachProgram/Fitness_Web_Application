@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Fitness Board Game</title>
+        <link rel="stylesheet" href="FitnessBoardGame.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+
+    <style>
+        body {
+            background-color: yellow;
+        }
+        .fit {
+            background-image: url("C:/Users/acapa/OneDrive/GPA-Transcript/Pictures/Fitness.jpeg");
+            background-size: contain;
+        }
+        h1 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 60px;
+            color: rgb(255, 0, 0);
+        }
+        p {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 30px;
+            color: rgb(204, 0, 255);
+        }
+        select {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 20px;
+            color: rgb(0, 0, 0);
+        }
+        .submit {
+            color: brown;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+
+    <body>
+        <div class="fit">
+            <h1>Fitness Board Game</h1>
+        </div>
+
+        <p>Press start to PLAY</p>
+
+        <button class="submit" onclick="startGame()">START</button>
+    </body> 
+</html>
+
+<script>
+    function startGame() {
+        alert("Game is starting!");
+        window.location.href = "FitnessBoardGamePlay.html";
+    }
+</script>

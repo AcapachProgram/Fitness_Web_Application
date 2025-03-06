@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MatchGamePlay</title>
+    <link rel="stylesheet" href="MatchGamePlay.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<style>
+    body {
+        background-color: yellow;
+    }
+    .fit {
+        background-image: url("C:/Users/acapa/OneDrive/GPA-Transcript/Pictures/Fitness.jpeg");
+        background-size: contain;
+    }
+    h1 {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 60px;
+        color: rgb(255, 0, 0);
+    }
+    p {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 30px;
+        color: rgb(204, 0, 255);
+    }
+    select {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 20px;
+        color: rgb(0, 0, 0);
+    }
+    .submit {
+        color: brown;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+<body>
+    <div class="fit">
+        <h1>Match Game Play</h1>
+        <label for="level">Select Level:</label>
+        <select id="level">
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+        </select>
+        <button class="play" onclick="startGame()">START</button>
+    </div>
+
+    <p>Match the cards before time runs out!</p>
+    <p>Time Left: <span id="timeLeft"></span></p>
+    <div id="gameBoard"></div>
+
+    <script>
+        const fitnessTerms = [
+            "Cardio", "Strength", "Flexibility", "Endurance", 
+            "HIIT", "Yoga", "Pilates", "CrossFit", 
+            "Squats", "Push-ups", "Lunges", "Planks", 
+            "Burpees", "Crunches", "Deadlifts", "Bench Press"
+        ];
+
+        const fitnessDefinitions = {
+            "Cardio": "Exercise that raises your heart rate.",
+            "Strength": "Exercise that builds muscle.",
+            "Flexibility": "Exercise that improves the range of motion of muscles and joints.",
+            "Endurance": "Exercise that increases stamina.",
+            "HIIT": "High-Intensity Interval Training.",
+            "Yoga": "A practice that combines physical postures, breathing exercises, and meditation.",
+            "Pilates": "A form of low-impact exercise that aims to strengthen muscles while improving postural alignment and flexibility.",
+            "CrossFit": "A high-intensity fitness program incorporating elements from several sports and types of exercise.",
+            "Squats": "A strength exercise in which the trainee lowers their hips from a standing position and then stands back up.",
+            "Push-ups": "An exercise in which a person lies facing the floor and, keeping their back straight, raises their body by pressing down on their hands.",
+            "Lunges": "A strength exercise that involves stepping forward and lowering your hips until both knees are bent at about a 90-degree angle.",
+            "Planks": "An isometric core strength exercise that involves maintaining a position similar to a push-up for the maximum possible time.",
+            "Burpees": "A full-body exercise that involves a squat, a push-up, and a jump.",
+            "Crunches": "An abdominal exercise in which the person lies on their back and lifts their upper body.",
+            "Deadlifts": "A weight training exercise in which a loaded barbell or bar is lifted off the ground to the level of the hips, then lowered back to the ground.",
+            "Bench Press": "A weight training exercise in which the trainee presses a weight upwards while lying on a bench."
+        };
+
+        function revealCard(button) {
+            let revealedCards = JSON.parse(localStorage.getItem("revealedCards"));
+            let matchedCards = JSON.parse(localStorage.getItem("matchedCards"));
+            if (revealedCards.length == 2) {
+                return;
+            }
+            let index = button.parentNode.cellIndex + button.parentNode.parentNode.rowIndex * localStorage.getItem("cols");
+            if (revealedCards.includes(index) || matchedCards.includes(index)) {
+                return;
+            }
+            let term = JSON.parse(localStorage.getItem("shuffledCards"))[index];
+            button.innerHTML = term + "<br>" + fitnessDefinitions[term];
+            revealedCards.push(index);
+            localStorage.setItem("revealedCards", JSON.stringify(revealedCards));
+            if (revealedCards.length == 2) {
+                setTimeout(checkMatch, 1000);
+            }
+        }
+
+        function checkMatch() {
+            let revealedCards = JSON.parse(localStorage.getItem("revealedCards"));
+            let shuffledCards = JSON.parse(localStorage.getItem("shuffledCards"));
+            let matchedCards = JSON.parse(localStorage.getItem("matchedCards"));
+            let buttons = document.querySelectorAll("#gameBoard button");
+            if (shuffledCards[revealedCards[0]] == shuffledCards[revealedCards[1]]) {
+                matchedCards.push(revealedCards[0]);
+                matchedCards.push(revealedCards[1]);
+                localStorage.setItem("matchedCards", JSON.stringify(matchedCards));
+                buttons[revealedCards[0]].style.visibility = "hidden";
+                buttons[revealedCards[1]].style.visibility = "hidden";
+            } else {
+                buttons[revealedCards[0]].innerHTML = "?";
+                buttons[revealedCards[1]].innerHTML = "?";
+            }
+            revealedCards = [];
+            localStorage.setItem("revealedCards", JSON.stringify(revealedCards));
+
+            // Check if all cards are matched
+            if (matchedCards.length === buttons.length) {
+                clearInterval(parseInt(localStorage.getItem("timer")));
+                alert("Congratulations! You've matched all the cards!");
+            }
+        }
+
+        function updateTimer() {
+            let timeLeft = parseInt(localStorage.getItem("timeLeft"));
+            timeLeft--;
+            localStorage.setItem("timeLeft", timeLeft);
+            document.getElementById("timeLeft").innerHTML = timeLeft; // Update the timer display
+            if (timeLeft <= 0) {
+                clearInterval(parseInt(localStorage.getItem("timer")));
+                alert("Game Over!");
+            }
+        }
+
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function setupGame() {
+            var level = localStorage.getItem("level");
+            var rows = 0;
+            var cols = 0;
+            var time = 0;
+            if (level == "Beginner") {
+                rows = 2;
+                cols = 2;
+                time = 10;
+            } else if (level == "Intermediate") {
+                rows = 4;
+                cols = 4;
+                time = 30;
+            } else if (level == "Advanced") {
+                rows = 6;
+                cols = 6;
+                time = 60;
+            }
+            localStorage.setItem("rows", rows);
+            localStorage.setItem("cols", cols);
+            localStorage.setItem("time", time);
+
+            let cards = [];
+            for (let i = 0; i < rows * cols / 2; i++) {
+                cards.push(fitnessTerms[i]);
+                cards.push(fitnessTerms[i]);
+            }
+
+            let shuffledCards = shuffle(cards);
+            let table = "<table>";
+            for (let i = 0; i < rows; i++) {
+                table += "<tr>";
+                for (let j = 0; j < cols; j++) {
+                    table += `<td><button onclick='revealCard(this)'>?</button></td>`;
+                }
+                table += "</tr>";
+            }
+            table += "</table>";
+            document.getElementById("gameBoard").innerHTML = table;
+            localStorage.setItem("shuffledCards", JSON.stringify(shuffledCards));
+            localStorage.setItem("revealedCards", JSON.stringify([]));
+            localStorage.setItem("matchedCards", JSON.stringify([]));
+            localStorage.setItem("timeLeft", time);
+            localStorage.setItem("timer", setInterval(updateTimer, 1000));
+            document.getElementById("timeLeft").innerHTML = time; // Initialize the timer display
+        }
+
+        function startGame() {
+            var level = document.getElementById("level").value;
+            localStorage.setItem("level", level);
+            setupGame();
+        }
+    </script>
+</body>
+</html>

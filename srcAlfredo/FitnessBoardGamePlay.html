@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Fitness Board Game</title>
+        <link rel="stylesheet" href="FitnessBoardGame.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body>
+        <button id="startgame">Start Game</button>
+        <div id="boardgame" style="display: none;">
+            <!-- Add your board game content here -->
+            <h1>Fitness Board Game</h1>
+            <p>Welcome to the Fitness Board Game!</p>
+            <!-- Board game with 64 spaces -->
+            <table id="game-board">
+                <tr>
+                    <td>Start</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                    <td>24</td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                    <td>30</td>
+                    <td>31</td>
+                    <td>32</td>
+                </tr>
+                <tr>
+                    <td>33</td>
+                    <td>34</td>
+                    <td>35</td>
+                    <td>36</td>
+                    <td>37</td>
+                    <td>38</td>
+                    <td>39</td>
+                    <td>40</td>
+                </tr>
+                <tr>
+                    <td>41</td>
+                    <td>42</td>
+                    <td>43</td>
+                    <td>44</td>
+                    <td>45</td>
+                    <td>46</td>
+                    <td>47</td>
+                    <td>48</td>
+                </tr>
+                <tr>
+                    <td>49</td>
+                    <td>50</td>
+                    <td>51</td>
+                    <td>52</td>
+                    <td>53</td>
+                    <td>54</td>
+                    <td>55</td>
+                    <td>56</td>
+                </tr>
+                <tr>
+                    <td>57</td>
+                    <td>58</td>
+                    <td>59</td>
+                    <td>60</td>
+                    <td>61</td>
+                    <td>62</td>
+                    <td>63</td>
+                    <td>Finish</td>
+                </tr>
+            </table>
+        </div>
+        <script>
+            $(document).ready(function() {
+                $('#startgame').click(function() {
+                    $('#boardgame').show();
+                });
+            });
+
+            function rollDice() {
+                return Math.floor(Math.random() * 6) + 1;
+            }
+
+            function movePlayer(player, spaces) {
+                var currentPosition = player.position;
+                var newPosition = currentPosition + spaces;
+                player.position = newPosition;
+                return newPosition;
+            }
+
+            function moveComputer(player, spaces) {
+                var currentPosition = player.position;
+                var newPosition = currentPosition + spaces;
+                player.position = newPosition;
+                return newPosition;
+            }
+        </script>
+    </body>
+    <style>
+        body {
+            background-color: yellow;
+        }
+        .fit {
+            background-image: url("C:/Users/acapa/OneDrive/GPA-Transcript/Pictures/Fitness.jpeg");
+            background-size: contain;
+        }
+        h1 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 60px;
+            color: rgb(255, 0, 0);
+        }
+        p {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 30px;
+            color: rgb(204, 0, 255);
+        }
+        select {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 20px;
+            color: rgb(0, 0, 0);
+        }
+        .submit {
+            color: brown;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</html>

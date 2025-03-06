@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <h1>Temperature Converter</h1>
+    <p>
+        <label for="cinput">Celsius</label>
+        <input id="cinput" type="text">
+    </p>
+
+    <p>
+        <label for="finput">Fahrenheit</label>
+        <input id="finput" type="text">
+    </p>
+    <input id="convertButton" type="button" value="Convert">
+    <p id="errorMessage"></p>
+
+    <p>
+        <img id="temperatureImage" src="" alt="Temperature Image" style="display:none;">
+    </p>
+</body>
+
+</html>
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    label {
+        display: block;
+    }
+
+    #errorMessage {
+        color: red;
+    }
+</style>
+
+<script>
+    window.addEventListener("DOMContentLoaded", domLoaded);
+
+    function domLoaded() {
+        let cinput = document.getElementById("cinput");
+        let finput = document.getElementById("finput");
+        let convertButton = document.getElementById("convertButton");
+        let errorMessage = document.getElementById("errorMessage");
+        let temperatureImage = document.getElementById("temperatureImage");
+
+        convertButton.addEventListener("click", function() {
+            let celsius = cinput.value;
+            let fahrenheit = finput.value;
+
+            if (isNaN(celsius) && isNaN(fahrenheit)) {
+                errorMessage.textContent = "Please enter a valid number in either Celsius or Fahrenheit.";
+                temperatureImage.style.display = "none";
+            }
+            else if(isNaN(celsius) && fahrenheit === "") {
+                errorMessage.textContent = String(celsius) + " is not a number.";
+                temperatureImage.style.display = "none";
+            }
+
+            else if(isNaN(fahrenheit) && celsius === "") {
+                errorMessage.textContent = String(fahrenheit) + " is not a number.";
+                temperatureImage.style.display = "none";
+            }
+            else if (!isNaN(celsius) && celsius !== "") {
+                fahrenheit = convertCtoF(parseFloat(celsius));
+                finput.value = fahrenheit;
+                errorMessage.textContent = "";
+                updateTemperatureImage(fahrenheit);
+            } else if (!isNaN(fahrenheit) && fahrenheit !== "") {
+                cinput.value = convertFtoC(parseFloat(fahrenheit));
+                errorMessage.textContent = "";
+                updateTemperatureImage(fahrenheit);
+            } else {
+                errorMessage.textContent = "Please enter a valid number.";
+                temperatureImage.style.display = "none";
+            }
+        });
+    }
+
+    function convertCtoF(degreesCelsius) {
+        return degreesCelsius * 9 / 5 + 32;
+    }
+
+    function convertFtoC(degreesFahrenheit) {
+        return (degreesFahrenheit - 32) * 5 / 9;
+    }
+
+    function updateTemperatureImage(fahrenheit) {
+        let temperatureImage = document.getElementById("temperatureImage");
+        if (fahrenheit < 32) {
+            temperatureImage.src = "C:/Users/acapa/OneDrive/GPA-Transcript/Pictures/snowflake.jpeg";
+        } else if (fahrenheit >= 32 && fahrenheit <= 50) {
+            temperatureImage.src = "C:/Users/acapa/OneDrive/GPA-Transcript/Pictures/rain.jpeg";
+        } else {
+            temperatureImage.src = "C:/Users/acapa/OneDrive/GPA-Transcript/Pictures/sun.jpeg";
+        }
+        temperatureImage.style.display = "block";
+    }
+</script>

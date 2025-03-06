@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HealthQuizResults</title>
+    <link rel="stylesheet" href="HealthQuizResults.css">
+</head>
+
+<style>
+    body{
+        background-color: yellow;
+    }
+
+    .fit{
+        background-image: url("C:/Users/acapa/OneDrive/GPA-Transcript/Pictures/Fitness.jpeg");
+        background-size: contain;
+    }
+
+    h1{
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 60px;
+        color: rgb(255, 0, 0);
+        
+    }
+
+    p{
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 30px;
+        color: rgb(204, 0, 255);
+    }
+
+    select{
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 20px;
+        color: rgb(0, 0, 0);
+    }
+
+    .submit{
+        color:brown;
+    }
+
+    .retake-button {
+        font-size: 20px;
+        color: white;
+        background-color: blue;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+    }
+</style>
+
+<div class="fit">
+    <h1>Health Quiz Results</h1>
+</div>
+
+<body>
+    <p>Thank you for taking the Health Quiz. Here are your results:</p>
+    <p id="results"></p>
+    <button class="retake-button" onclick="retakeQuiz()">Retake Quiz</button>
+</body>
+
+<script>
+    var score = localStorage.getItem('quizScore') || 0;
+    var healthStatus = "";
+    var color = "";
+
+    if(score >= 10 && score <= 16){
+        healthStatus = "Poor";
+        color = "red";
+    }
+    else if(score >= 17 && score <= 23){
+        healthStatus = "Fair";
+        color = "orange";
+    }
+    else if(score >= 24 && score <= 30){
+        healthStatus = "Good";
+        color = "yellow";
+    }
+    else if(score >= 31 && score <= 40){
+        healthStatus = "Excellent";
+        color = "green";
+    }
+
+    var resultsElement = document.getElementById("results");
+    resultsElement.innerHTML = "Your score is: " + score + "<br>Your health status is: " + healthStatus;
+    resultsElement.style.color = color;
+
+    var suggestions = document.createElement("p");
+    var suggestionText = "";
+
+    if (healthStatus === "Poor") {
+        suggestionText = "Check out these articles to improve your fitness: <a href='https://www.healthline.com/nutrition/10-tips-to-improve-your-health'>10 Tips to Improve Your Health</a>, <a href='https://www.webmd.com/fitness-exercise/features/10-workout-secrets-expert-exercise-tips'>10 Workout Secrets</a>";
+    } else if (healthStatus === "Fair") {
+        suggestionText = "Check out these articles to boost your fitness: <a href='https://www.self.com/story/ways-to-improve-your-fitness'>Ways to Improve Your Fitness</a>, <a href='https://www.verywellfit.com/ways-to-improve-your-fitness-1231593'>Ways to Improve Your Fitness Level</a>";
+    } else if (healthStatus === "Good") {
+        suggestionText = "Check out these articles to maintain your fitness: <a href='https://www.menshealth.com/fitness/a19539393/ways-to-maintain-fitness/'>Ways to Maintain Fitness</a>, <a href='https://www.shape.com/fitness/tips/10-ways-maintain-your-fitness-level'>10 Ways to Maintain Your Fitness Level</a>";
+    } else if (healthStatus === "Excellent") {
+        suggestionText = "Check out these articles to challenge your fitness: <a href='https://www.mensjournal.com/health-fitness/10-ways-challenge-your-fitness/'>10 Ways to Challenge Your Fitness</a>, <a href='https://www.womenshealthmag.com/fitness/a19989485/ways-to-challenge-your-fitness/'>Ways to Challenge Your Fitness</a>";
+    }
+
+    suggestions.innerHTML = suggestionText;
+    document.body.appendChild(suggestions);
+
+    // Store past quiz results
+    var pastResults = JSON.parse(localStorage.getItem('pastQuizResults')) || [];
+    pastResults.push({ score: score, healthStatus: healthStatus });
+    localStorage.setItem('pastQuizResults', JSON.stringify(pastResults));
+
+    function retakeQuiz() {
+        window.location.href = 'HealthQuiz.html'; // Replace with the actual path to your quiz page
+    }
+</script>
+</html>
