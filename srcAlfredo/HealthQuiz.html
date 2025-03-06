@@ -33,160 +33,157 @@
         color: brown;
     }
 </style>
-<div class="fit">
-    <h1>Health Quiz</h1>
-</div>
-<p>1. How often do you exercise?</p>
-<input type="radio" id="exerciseA" name="exercise" value="A">
-<label for="exerciseA">A. Always</label><br>
-<input type="radio" id="exerciseB" name="exercise" value="B">
-<label for="exerciseB">B. Often</label><br>
-<input type="radio" id="exerciseC" name="exercise" value="C">
-<label for="exerciseC">C. Somewhat</label><br>
-<input type="radio" id="exerciseD" name="exercise" value="D">
-<label for="exerciseD">D. None or Minimal</label><br>
+<body>
+    <form id="healthQuizForm">
+        <div class="fit">
+            <h1>Health Quiz</h1>
+        </div>
+        <p>1. How often do you exercise?</p>
+        <input type="radio" id="exerciseA" name="exercise" value="A" required>
+        <label for="exerciseA">A. Always</label><br>
+        <input type="radio" id="exerciseB" name="exercise" value="B">
+        <label for="exerciseB">B. Often</label><br>
+        <input type="radio" id="exerciseC" name="exercise" value="C">
+        <label for="exerciseC">C. Somewhat</label><br>
+        <input type="radio" id="exerciseD" name="exercise" value="D">
+        <label for="exerciseD">D. None or Minimal</label><br>
 
-<p>2. Do you smoke?</p>
-<input type="radio" id="smokeA" name="smoke" value="A">
-<label for="smokeA">A. Non-Smoker</label><br>
-<input type="radio" id="smokeB" name="smoke" value="B">
-<label for="smokeB">B. Former Smoker</label><br>
-<input type="radio" id="smokeC" name="smoke" value="C">
-<label for="smokeC">C. Often</label><br>
-<input type="radio" id="smokeD" name="smoke" value="D">
-<label for="smokeD">D. Smoker</label><br>
+        <p>2. Do you smoke?</p>
+        <input type="radio" id="smokeA" name="smoke" value="A" required>
+        <label for="smokeA">A. Non-Smoker</label><br>
+        <input type="radio" id="smokeB" name="smoke" value="B">
+        <label for="smokeB">B. Former Smoker</label><br>
+        <input type="radio" id="smokeC" name="smoke" value="C">
+        <label for="smokeC">C. Often</label><br>
+        <input type="radio" id="smokeD" name="smoke" value="D">
+        <label for="smokeD">D. Smoker</label><br>
 
-<p>3. Do you participate in any sports? If so, which one?</p>
-<input type="radio" id="sportsA" name="sports" value="A">
-<label for="sportsA">A. Basketball</label><br>
-<input type="radio" id="sportsB" name="sports" value="B">
-<label for="sportsB">B. Soccer</label><br>
-<input type="radio" id="sportsC" name="sports" value="C">
-<label for="sportsC">C. Football</label><br>
-<input type="radio" id="sportsD" name="sports" value="D">
-<label for="sportsD">D. Other</label><br>
-<input type="radio" id="sportsE" name="sports" value="E">
-<label for="sportsE">E. None</label><br>
+        <p>3. Do you participate in any sports? If so, which one?</p>
+        <input type="radio" id="sportsA" name="sports" value="A" required>
+        <label for="sportsA">A. Basketball</label><br>
+        <input type="radio" id="sportsB" name="sports" value="B">
+        <label for="sportsB">B. Soccer</label><br>
+        <input type="radio" id="sportsC" name="sports" value="C">
+        <label for="sportsC">C. Football</label><br>
+        <input type="radio" id="sportsD" name="sports" value="D">
+        <label for="sportsD">D. Other</label><br>
+        <input type="radio" id="sportsE" name="sports" value="E">
+        <label for="sportsE">E. None</label><br>
 
-<p>4. How much screentime do you spend daily?</p>
-<input type="radio" id="screentimeA" name="screentime" value="A">
-<label for="screentimeA">A. 1-2 hours</label><br>
-<input type="radio" id="screentimeB" name="screentime" value="B">
-<label for="screentimeB">B. 3-4 hours</label><br>
-<input type="radio" id="screentimeC" name="screentime" value="C">
-<label for="screentimeC">C. 5-6 hours</label><br>
-<input type="radio" id="screentimeD" name="screentime" value="D">
-<label for="screentimeD">D. 7+ hours</label><br>
+        <p>4. How much screentime do you spend daily?</p>
+        <input type="radio" id="screentimeA" name="screentime" value="A" required>
+        <label for="screentimeA">A. 1-2 hours</label><br>
+        <input type="radio" id="screentimeB" name="screentime" value="B">
+        <label for="screentimeB">B. 3-4 hours</label><br>
+        <input type="radio" id="screentimeC" name="screentime" value="C">
+        <label for="screentimeC">C. 5-6 hours</label><br>
+        <input type="radio" id="screentimeD" name="screentime" value="D">
+        <label for="screentimeD">D. 7+ hours</label><br>
 
-<p>5. How many hours of sleep do you get daily?</p>
-<input type="radio" id="sleepA" name="sleep" value="A">
-<label for="sleepA">A. 8-10 hours</label><br>
-<input type="radio" id="sleepB" name="sleep" value="B">
-<label for="sleepB">B. 6-7 hours</label><br>
-<input type="radio" id="sleepC" name="sleep" value="C">
-<label for="sleepC">C. 4-5 hours</label><br>
-<input type="radio" id="sleepD" name="sleep" value="D">
-<label for="sleepD">D. 3 hours or less</label><br>
+        <p>5. How many hours of sleep do you get daily?</p>
+        <input type="radio" id="sleepA" name="sleep" value="A" required>
+        <label for="sleepA">A. 8-10 hours</label><br>
+        <input type="radio" id="sleepB" name="sleep" value="B">
+        <label for="sleepB">B. 6-7 hours</label><br>
+        <input type="radio" id="sleepC" name="sleep" value="C">
+        <label for="sleepC">C. 4-5 hours</label><br>
+        <input type="radio" id="sleepD" name="sleep" value="D">
+        <label for="sleepD">D. 3 hours or less</label><br>
 
-<p>6. What is your diet like?</p>
-<input type="radio" id="dietA" name="diet" value="A">
-<label for="dietA">A. Healthy</label><br>
-<input type="radio" id="dietB" name="diet" value="B">
-<label for="dietB">B. Balanced</label><br>
-<input type="radio" id="dietC" name="diet" value="C">
-<label for="dietC">C. Unhealthy</label><br>
-<input type="radio" id="dietD" name="diet" value="D">
-<label for="dietD">D. Junk Food</label><br>
+        <p>6. What is your diet like?</p>
+        <input type="radio" id="dietA" name="diet" value="A" required>
+        <label for="dietA">A. Healthy</label><br>
+        <input type="radio" id="dietB" name="diet" value="B">
+        <label for="dietB">B. Balanced</label><br>
+        <input type="radio" id="dietC" name="diet" value="C">
+        <label for="dietC">C. Unhealthy</label><br>
+        <input type="radio" id="dietD" name="diet" value="D">
+        <label for="dietD">D. Junk Food</label><br>
 
-<p>7. What is your BMI (Body Mass Index)?</p>
-<input type="radio" id="bmiA" name="bmi" value="A">
-<label for="bmiA">A. Underweight</label><br>
-<input type="radio" id="bmiB" name="bmi" value="B">
-<label for="bmiB">B. Normal</label><br>
-<input type="radio" id="bmiC" name="bmi" value="C">
-<label for="bmiC">C. Overweight</label><br>
-<input type="radio" id="bmiD" name="bmi" value="D">
-<label for="bmiD">D. Obese</label><br>
+        <p>7. What is your BMI (Body Mass Index)?</p>
+        <input type="radio" id="bmiA" name="bmi" value="A" required>
+        <label for="bmiA">A. Underweight</label><br>
+        <input type="radio" id="bmiB" name="bmi" value="B">
+        <label for="bmiB">B. Normal</label><br>
+        <input type="radio" id="bmiC" name="bmi" value="C">
+        <label for="bmiC">C. Overweight</label><br>
+        <input type="radio" id="bmiD" name="bmi" value="D">
+        <label for="bmiD">D. Obese</label><br>
 
-<p>8. What is your state of your mental health?</p>
-<input type="radio" id="mentalA" name="mental" value="A">
-<label for="mentalA">A. Healthy</label><br>
-<input type="radio" id="mentalB" name="mental" value="B">
-<label for="mentalB">B. Balanced</label><br>
-<input type="radio" id="mentalC" name="mental" value="C">
-<label for="mentalC">C. Unhealthy</label><br>
-<input type="radio" id="mentalD" name="mental" value="D">
-<label for="mentalD">D. Depressed</label><br>
+        <p>8. What is your state of your mental health?</p>
+        <input type="radio" id="mentalA" name="mental" value="A" required>
+        <label for="mentalA">A. Healthy</label><br>
+        <input type="radio" id="mentalB" name="mental" value="B">
+        <label for="mentalB">B. Balanced</label><br>
+        <input type="radio" id="mentalC" name="mental" value="C">
+        <label for="mentalC">C. Unhealthy</label><br>
+        <input type="radio" id="mentalD" name="mental" value="D">
+        <label for="mentalD">D. Depressed</label><br>
 
-<p>9. How is your posture?</p>
-<input type="radio" id="postureA" name="posture" value="A">
-<label for="postureA">A. Good</label><br>
-<input type="radio" id="postureB" name="posture" value="B">
-<label for="postureB">B. Okay</label><br>
-<input type="radio" id="postureC" name="posture" value="C">
-<label for="postureC">C. Bad</label><br>
-<input type="radio" id="postureD" name="posture" value="D">
-<label for="postureD">D. Horrible</label><br>
+        <p>9. How is your posture?</p>
+        <input type="radio" id="postureA" name="posture" value="A" required>
+        <label for="postureA">A. Good</label><br>
+        <input type="radio" id="postureB" name="posture" value="B">
+        <label for="postureB">B. Okay</label><br>
+        <input type="radio" id="postureC" name="posture" value="C">
+        <label for="postureC">C. Bad</label><br>
+        <input type="radio" id="postureD" name="posture" value="D">
+        <label for="postureD">D. Horrible</label><br>
 
-<p>10. How often do you visit the doctor?</p>
-<input type="radio" id="doctorA" name="doctor" value="A">
-<label for="doctorA">A. Regularly</label><br>
-<input type="radio" id="doctorB" name="doctor" value="B">
-<label for="doctorB">B. Sometimes</label><br>
-<input type="radio" id="doctorC" name="doctor" value="C">
-<label for="doctorC">C. Rarely</label><br>
-<input type="radio" id="doctorD" name="doctor" value="D">
-<label for="doctorD">D. Never</label><br>
+        <p>10. How often do you visit the doctor?</p>
+        <input type="radio" id="doctorA" name="doctor" value="A" required>
+        <label for="doctorA">A. Regularly</label><br>
+        <input type="radio" id="doctorB" name="doctor" value="B">
+        <label for="doctorB">B. Sometimes</label><br>
+        <input type="radio" id="doctorC" name="doctor" value="C">
+        <label for="doctorC">C. Rarely</label><br>
+        <input type="radio" id="doctorD" name="doctor" value="D">
+        <label for="doctorD">D. Never</label><br>
 
-<button type="button" onclick="submission()">Submit</button>
+        <button type="submit">Submit</button>
+    </form>
 
-<p><a href="PastQuizzes.html">View Past Quizzes</a></p>
+    <p><a href="PastQuizzes.html">View Past Quizzes</a></p>
 
-<script>
-    function submission() {
-        const questions = [
-            "exercise", "smoke", "sports", "screentime", "sleep", 
-            "diet", "bmi", "mental", "posture", "doctor"
-        ];
+    <script>
+        $(document).ready(function() {
+            $("#healthQuizForm").on("submit", function(event) {
+                event.preventDefault();
 
-        for (let i = 0; i < questions.length; i++) {
-            if (!$(`input[name='${questions[i]}']:checked`).val()) {
-                alert(`Please answer question ${i + 1}.`);
-                return false;
-            }
-        }
+                if (confirm("Are you sure you want to submit?")) {
+                    let score = 0;
+                    const questions = [
+                        "exercise", "smoke", "sports", "screentime", "sleep", 
+                        "diet", "bmi", "mental", "posture", "doctor"
+                    ];
 
-        if (confirm("Are you sure you want to submit?")) {
-            let score = 0;
+                    questions.forEach(question => {
+                        const options = document.getElementsByName(question);
+                        options.forEach(option => {
+                            if (option.checked) {
+                                switch (option.value) {
+                                    case "A":
+                                        score += 4;
+                                        break;
+                                    case "B":
+                                        score += 3;
+                                        break;
+                                    case "C":
+                                        score += 2;
+                                        break;
+                                    case "D":
+                                        score += 1;
+                                        break;
+                                }
+                            }
+                        });
+                    });
 
-            questions.forEach(question => {
-                const options = document.getElementsByName(question);
-                options.forEach(option => {
-                    if (option.checked) {
-                        switch (option.value) {
-                            case "A":
-                                score += 4;
-                                break;
-                            case "B":
-                                score += 3;
-                                break;
-                            case "C":
-                                score += 2;
-                                break;
-                            case "D":
-                                score += 1;
-                                break;
-                        }
-                    }
-                });
+                    localStorage.setItem("quizScore", score);
+                    window.location.href = "HealthQuizResults.html";
+                }
             });
-
-            localStorage.setItem("quizScore", score);
-            $("#includedContent").load("HealthQuizResults.html");
-            window.location.href = "HealthQuizResults.html";
-        } else {
-            return false;
-        }
-    }
-</script>
+        });
+    </script>
+</body>
 </html>
