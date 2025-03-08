@@ -10,95 +10,62 @@
         <button id="startgame">Start Game</button>
         <button id="rolldie" style="display: none;">Roll Die</button>
         <div id="boardgame" style="display: none;">
-            <!-- Add your board game content here -->
             <h1>Fitness Board Game</h1>
             <p>Welcome to the Fitness Board Game!</p>
-            <!-- Board game with 64 spaces -->
+            <label for="board-size">Select Board Size:</label>
+            <select id="board-size">
+                <option value="64">64 squares</option>
+                <option value="128">128 squares</option>
+                <option value="256">256 squares</option>
+            </select>
             <table id="game-board">
-                <tr>
-                    <td>Start</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>7</td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>10</td>
-                    <td>11</td>
-                    <td>12</td>
-                    <td>13</td>
-                    <td>14</td>
-                    <td>15</td>
-                    <td>16</td>
-                </tr>
-                <tr>
-                    <td>17</td>
-                    <td>18</td>
-                    <td>19</td>
-                    <td>20</td>
-                    <td>21</td>
-                    <td>22</td>
-                    <td>23</td>
-                    <td>24</td>
-                </tr>
-                <tr>
-                    <td>25</td>
-                    <td>26</td>
-                    <td>27</td>
-                    <td>28</td>
-                    <td>29</td>
-                    <td>30</td>
-                    <td>31</td>
-                    <td>32</td>
-                </tr>
-                <tr>
-                    <td>33</td>
-                    <td>34</td>
-                    <td>35</td>
-                    <td>36</td>
-                    <td>37</td>
-                    <td>38</td>
-                    <td>39</td>
-                    <td>40</td>
-                </tr>
-                <tr>
-                    <td>41</td>
-                    <td>42</td>
-                    <td>43</td>
-                    <td>44</td>
-                    <td>45</td>
-                    <td>46</td>
-                    <td>47</td>
-                    <td>48</td>
-                </tr>
-                <tr>
-                    <td>49</td>
-                    <td>50</td>
-                    <td>51</td>
-                    <td>52</td>
-                    <td>53</td>
-                    <td>54</td>
-                    <td>55</td>
-                    <td>56</td>
-                </tr>
-                <tr>
-                    <td>57</td>
-                    <td>58</td>
-                    <td>59</td>
-                    <td>60</td>
-                    <td>61</td>
-                    <td>62</td>
-                    <td>63</td>
-                    <td>Finish</td>
-                </tr>
+                <!-- Table content will be generated dynamically based on selection -->
             </table>
+            <script>
+                $(document).ready(function() {
+                    $('#board-size').change(function() {
+                        var size = $(this).val();
+                        generateBoard(size);
+                    });
+
+                    function generateBoard(size) {
+                        var table = $('#game-board');
+                        table.empty();
+                        var rows = Math.sqrt(size);
+                        var cellNumber = 1;
+                        for (var i = 0; i < rows; i++) {
+                            var row = $('<tr></tr>');
+                            for (var j = 0; j < rows; j++) {
+                                var cell = $('<td></td>');
+                                if (i === 0 && j === 0) {
+                                    cell.text('Start');
+                                } else if (i === rows - 1 && j === rows - 1) {
+                                    cell.text('Finish');
+                                } else {
+                                    cell.text(cellNumber);
+                                }
+                                cellNumber++;
+                                row.append(cell);
+                            }
+                            table.append(row);
+                        }
+                    }
+
+                    // Generate default board
+                    generateBoard(64);
+                });
+            </script>
         </div>
         <script>
             $(document).ready(function() {
+                var player = {
+                    position: 0
+                };
+                var computer = {
+                    position: 0,
+                    moves: 0
+                };
+
                 $('#startgame').click(function() {
                     $('#startgame').hide();
                     $('#rolldie').show();
@@ -106,29 +73,49 @@
                 });
 
                 $('#rolldie').click(function() {
+                    $('#board-size').hide();
+                    $('label[for="board-size"]').hide();
                     var roll = rollDice();
                     alert('You rolled a ' + roll);
-                    // Add your logic to move the player based on the roll
+                    var playerPosition = movePlayer(player, roll);
+                    var computerPosition = moveComputer(computer, roll);
+                    updateBoard(playerPosition, computerPosition);
+                    alert('Computer has made ' + computer.moves + ' moves and is at position ' + computer.position);
                 });
+
+                function rollDice() {
+                    return Math.floor(Math.random() * 6) + 1;
+                }
+
+                function movePlayer(player, spaces) {
+                    var currentPosition = player.position;
+                    var newPosition = currentPosition + spaces;
+                    var boardSize = $('#board-size').val();
+                    if (newPosition >= boardSize) {
+                        newPosition = boardSize - 1; // Ensure player does not exceed board size
+                    }
+                    player.position = newPosition;
+                    return newPosition;
+                }
+
+                function moveComputer(player, spaces) {
+                    var currentPosition = player.position;
+                    var newPosition = currentPosition + spaces;
+                    var boardSize = $('#board-size').val();
+                    if (newPosition >= boardSize) {
+                        newPosition = boardSize - 1; // Ensure computer does not exceed board size
+                    }
+                    player.position = newPosition;
+                    player.moves++;
+                    return newPosition;
+                }
+
+                function updateBoard(playerPosition, computerPosition) {
+                    $('#game-board td').removeClass('player computer');
+                    $('#game-board td').eq(playerPosition).addClass('player');
+                    $('#game-board td').eq(computerPosition).addClass('computer');
+                }
             });
-
-            function rollDice() {
-                return Math.floor(Math.random() * 6) + 1;
-            }
-
-            function movePlayer(player, spaces) {
-                var currentPosition = player.position;
-                var newPosition = currentPosition + spaces;
-                player.position = newPosition;
-                return newPosition;
-            }
-
-            function moveComputer(player, spaces) {
-                var currentPosition = player.position;
-                var newPosition = currentPosition + spaces;
-                player.position = newPosition;
-                return newPosition;
-            }
         </script>
     </body>
     <style>
@@ -168,6 +155,12 @@
         }
         th {
             background-color: #f2f2f2;
+        }
+        .player {
+            background-color: blue;
+        }
+        .computer {
+            background-color: red;
         }
     </style>
 </html>
