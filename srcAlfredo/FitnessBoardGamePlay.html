@@ -8,6 +8,7 @@
     </head>
     <body>
         <button id="startgame">Start Game</button>
+        <button id="rolldie" style="display: none;">Roll Die</button>
         <div id="boardgame" style="display: none;">
             <!-- Add your board game content here -->
             <h1>Fitness Board Game</h1>
@@ -99,7 +100,15 @@
         <script>
             $(document).ready(function() {
                 $('#startgame').click(function() {
+                    $('#startgame').hide();
+                    $('#rolldie').show();
                     $('#boardgame').show();
+                });
+
+                $('#rolldie').click(function() {
+                    var roll = rollDice();
+                    alert('You rolled a ' + roll);
+                    // Add your logic to move the player based on the roll
                 });
             });
 
