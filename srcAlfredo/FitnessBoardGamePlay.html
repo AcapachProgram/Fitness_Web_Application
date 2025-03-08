@@ -116,6 +116,52 @@
                     $('#game-board td').eq(computerPosition).addClass('computer');
                 }
             });
+
+                function gameevent(){
+                    random = Math.floor(Math.random() * 3) + 1;
+                    if (random == 1){
+
+                        //CREATE 64 questions about fitness with four options for the user to select. One of the options is correct, giving them the opportunity to move one space forward. If they get the question wrong, their position will not change but will have the correct answer displayed with an explanation. They can close the alert box and continue playing the game.
+
+                    }
+
+                    else if (random == 2) {
+                        let fitnessActivities = [
+                            "Do 10 push-ups",
+                            "Run in place for 1 minute",
+                            "Do 15 jumping jacks",
+                            "Hold a plank for 30 seconds",
+                            "Do 20 squats",
+                            "Do 10 burpees",
+                            "Do 15 sit-ups",
+                            "Do 20 lunges",
+                            "Do 30 seconds of high knees",
+                            "Do 10 tricep dips"
+                        ];
+                        let activity = fitnessActivities[Math.floor(Math.random() * fitnessActivities.length)];
+                        alert("Fitness Challenge: " + activity);
+                        
+                    }
+
+                    else if (random == 3){
+                        extraspace = Math.floor(Math.random() * 2) + 1;
+                        let signchange = 1;
+                        if (Math.random() < 0.5){
+                            signchange = -1;
+                        }
+
+                        if (signchange == 1){
+                            alert("You have been given extra spaces to move forward!");
+                            player.position = player.position + extraspace;
+
+                        }
+
+                        else if (signchange == -1){
+                            alert("Slow down, buddy! You will need to move back a few spaces!");
+                            player.position = player.position - extraspace;
+                        }
+                    }
+                }
         </script>
     </body>
     <style>
