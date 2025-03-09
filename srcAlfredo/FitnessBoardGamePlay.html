@@ -78,8 +78,13 @@
                     var roll = rollDice();
                     alert('You rolled a ' + roll);
                     var playerPosition = movePlayer(player, roll);
-                    var computerPosition = moveComputer(computer, roll);
-                    updateBoard(playerPosition, computerPosition);
+                    updateBoard(playerPosition, computer.position);
+                    gameevent();
+                    var computerRoll = rollDice();
+                    alert('Computer rolled a ' + computerRoll);
+                    var computerPosition = moveComputer(computer, computerRoll);
+                    updateBoard(player.position, computerPosition);
+                    gameend();
                     alert('Computer has made ' + computer.moves + ' moves and is at position ' + computer.position);
                 });
 
@@ -115,13 +120,50 @@
                     $('#game-board td').eq(playerPosition).addClass('player');
                     $('#game-board td').eq(computerPosition).addClass('computer');
                 }
-            });
 
                 function gameevent(){
                     random = Math.floor(Math.random() * 3) + 1;
                     if (random == 1){
 
-                        //CREATE 64 questions about fitness with four options for the user to select. One of the options is correct, giving them the opportunity to move one space forward. If they get the question wrong, their position will not change but will have the correct answer displayed with an explanation. They can close the alert box and continue playing the game.
+                        let fitnessQuestions = {
+                            "What is the recommended amount of daily physical activity for adults?": ["30 minutes", "60 minutes", "90 minutes"],
+                            "Which of the following is a cardiovascular exercise?": ["Running", "Weightlifting", "Yoga"],
+                            "How many days a week should strength training be done?": ["2-3 days", "4-5 days", "Every day"],
+                            "What is the primary benefit of stretching?": ["Increased flexibility", "Increased strength", "Increased endurance"],
+                            "Which nutrient is essential for muscle repair?": ["Protein", "Carbohydrates", "Fats"],
+                            "What is the best way to stay hydrated during exercise?": ["Drink water", "Drink soda", "Drink coffee"],
+                            "Which exercise is best for strengthening the core?": ["Plank", "Bicep curls", "Leg press"],
+                            "How many hours of sleep are recommended for adults?": ["7-9 hours", "4-6 hours", "10-12 hours"],
+                            "What is the primary benefit of aerobic exercise?": ["Improved cardiovascular health", "Increased muscle mass", "Improved flexibility"],
+                            "Which of the following is a sign of overtraining?": ["Persistent fatigue", "Increased energy", "Improved performance"],
+                            "What is the recommended amount of water intake per day?": ["8 cups", "4 cups", "12 cups"],
+                            "Which exercise is best for improving balance?": ["Yoga", "Bench press", "Deadlift"],
+                            "What is the primary benefit of strength training?": ["Increased muscle mass", "Improved flexibility", "Increased endurance"],
+                            "Which nutrient is essential for energy production?": ["Carbohydrates", "Protein", "Fats"],
+                            "What is the best way to warm up before exercise?": ["Dynamic stretching", "Static stretching", "Sitting"],
+                            "Which exercise is best for improving flexibility?": ["Yoga", "Running", "Cycling"],
+                            "How many days a week should cardiovascular exercise be done?": ["3-5 days", "1-2 days", "Every day"],
+                            "What is the primary benefit of high-intensity interval training (HIIT)?": ["Improved cardiovascular health", "Increased muscle mass", "Improved flexibility"],
+                            "Which nutrient is essential for bone health?": ["Calcium", "Protein", "Carbohydrates"],
+                            "What is the best way to cool down after exercise?": ["Static stretching", "Dynamic stretching", "Sitting"]
+                        };
+                        let questionKeys = Object.keys(fitnessQuestions);
+                        let randomQuestion = questionKeys[Math.floor(Math.random() * questionKeys.length)];
+                        let answers = fitnessQuestions[randomQuestion];
+                        let answerOptions = answers.map((answer, index) => `${index + 1}. ${answer}`).join("\n");
+                        let userAnswer = prompt(randomQuestion + "\n" + answerOptions);
+                        if (userAnswer == null) {
+                            alert("You did not answer the question.");
+                        } else {
+                            let correctAnswer = answers[0];
+                            if (answers[userAnswer - 1] === correctAnswer) {
+                                alert("Correct! You get to move forward 2 spaces.");
+                                player.position += 2;
+                            } else {
+                                alert("Incorrect. The correct answer is: " + correctAnswer + ".");
+                            }
+                        }
+
 
                     }
 
@@ -162,6 +204,17 @@
                         }
                     }
                 }
+
+                function gameend(){
+                    var boardSize = $('#board-size').val();
+                    var finishLine = boardSize - 1;
+                    if (player.position >= finishLine){
+                        alert("Congratulations! You have reached the finish line!");
+                    } else if (computer.position >= finishLine){
+                        alert("The computer has reached the finish line. Better luck next time!");
+                    }
+                }
+            });
         </script>
     </body>
     <style>
