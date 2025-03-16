@@ -1,5 +1,38 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    
+    <body>
+        <div class="fit">
+            <h1>Calories Tracker</h1>
+        </div>
+
+        <div class="calories">
+            <h2>Total Calories Per Day</h2>
+            <p id="totalCalories">Loading...</p>
+        </div>
+
+        <script>
+            async function fetchCalories() {
+                const workoutResponse = await fetch('./Workout.html');
+                const workoutText = await workoutResponse.text();
+                const workoutCalories = extractCalories(workoutText);
+
+                const gameResponse = await fetch('./FitnessBoardGamePlay.html');
+                const gameText = await gameResponse.text();
+                const gameCalories = extractCalories(gameText);
+
+                const totalCalories = workoutCalories + gameCalories;
+                document.getElementById('totalCalories').innerText = totalCalories + ' kcal';
+            }
+
+            function extractCalories(htmlText) {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlText, 'text/html');
+                const caloriesElement = doc.querySelector('.calories');
+                return caloriesElement ? parseInt(caloriesElement.innerText) : 0;
+            }
+
+            fetchCalories();
+        </script>
+    </body>
 </html>
