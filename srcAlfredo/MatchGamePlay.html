@@ -205,6 +205,12 @@
             localStorage.setItem("level", level);
             setupGame();
         }
+
+        // Load JSON data from CaloriesTracker.html
+        $.getJSON("CaloriesTracker.html", function(data) {
+            console.log(data);
+            // You can use the data here
+        });
     </script>
 </body>
 </html>
