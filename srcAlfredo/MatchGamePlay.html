@@ -129,6 +129,7 @@
             if (matchedCards.length === buttons.length) {
                 clearInterval(parseInt(localStorage.getItem("timer")));
                 alert("Congratulations! You've matched all the cards!");
+                resetGame();
             }
         }
 
@@ -140,6 +141,7 @@
             if (timeLeft <= 0) {
                 clearInterval(parseInt(localStorage.getItem("timer")));
                 alert("Game Over!");
+                resetGame();
             }
         }
 
@@ -204,6 +206,19 @@
             var level = document.getElementById("level").value;
             localStorage.setItem("level", level);
             setupGame();
+        }
+
+        function resetGame() {
+            localStorage.removeItem("rows");
+            localStorage.removeItem("cols");
+            localStorage.removeItem("time");
+            localStorage.removeItem("shuffledCards");
+            localStorage.removeItem("revealedCards");
+            localStorage.removeItem("matchedCards");
+            localStorage.removeItem("timeLeft");
+            localStorage.removeItem("timer");
+            document.getElementById("gameBoard").innerHTML = "";
+            document.getElementById("timeLeft").innerHTML = "";
         }
 
         // Load JSON data from CaloriesTracker.html
