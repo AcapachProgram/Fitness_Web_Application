@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
     <body>
         <div class="fit">
@@ -13,16 +12,18 @@
 
         <script>
             async function fetchCalories() {
-                const workoutResponse = await fetch('./Workout.html');
-                const workoutText = await workoutResponse.text();
-                const workoutCalories = extractCalories(workoutText);
+                const workoutCalories = await fetchAndExtractCalories('./Workout.html');
+                const matchGameCalories = await fetchAndExtractCalories('./MatchGamePlay.html');
+                const fitnessBoardGameCalories = await fetchAndExtractCalories('./FitnessBoardGamePlay.html');
 
-                const gameResponse = await fetch('./FitnessBoardGamePlay.html');
-                const gameText = await gameResponse.text();
-                const gameCalories = extractCalories(gameText);
-
-                const totalCalories = workoutCalories + gameCalories;
+                const totalCalories = workoutCalories + matchGameCalories + fitnessBoardGameCalories;
                 document.getElementById('totalCalories').innerText = totalCalories + ' kcal';
+            }
+
+            async function fetchAndExtractCalories(url) {
+                const response = await fetch(url);
+                const text = await response.text();
+                return extractCalories(text);
             }
 
             function extractCalories(htmlText) {
@@ -32,7 +33,7 @@
                 return caloriesElement ? parseInt(caloriesElement.innerText) : 0;
             }
 
-            fetchCalories();
+            document.addEventListener('DOMContentLoaded', fetchCalories);
         </script>
     </body>
 </html>
