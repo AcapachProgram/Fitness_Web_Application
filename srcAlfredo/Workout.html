@@ -9,6 +9,108 @@
 
     <style>
         /* Add your existing styles here */
+        .fit {
+            text-align: center;
+        }
+
+        .image-container {
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+        }
+
+        .text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .text-overlay.laps {
+            top: 10%;
+            left: 10%;
+        }
+
+        .text-overlay.calories {
+            top: 10%;
+            right: 10%;
+        }
+
+        .text-overlay.time {
+            bottom: 10%;
+            left: 10%;
+        }
+
+        .text-overlay.distance {
+            bottom: 10%;
+            right: 10%;
+        }
+
+        .text-overlay.speed {
+            bottom: 50%;
+            left: 50%;
+            transform: translate(-50%, 50%);
+        }
+
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="number"] {
+            width: 100px;
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        select {
+            width: 100px;
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        button.submit {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button.submit:hover {
+            background-color: #45a049;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        
         
     </style>
 
