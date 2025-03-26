@@ -29,7 +29,7 @@
             function extractCalories(htmlText) {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(htmlText, 'text/html');
-                const caloriesElement = doc.querySelector('.calories');
+                const caloriesElement = doc.querySelector('.calories p');
                 return caloriesElement ? parseInt(caloriesElement.innerText) : 0;
             }
 
