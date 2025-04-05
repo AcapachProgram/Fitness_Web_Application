@@ -210,6 +210,21 @@
                     } else if (computer.position >= finishLine){
                         alert("The computer has reached the finish line. Better luck next time!");
                     }
+                    let gamecalories = 0;
+                    var boardSize = $('#board-size').val();
+                    if (boardSize == 64) {
+                        gamecalories = 200; // Example calories for 64 squares
+                    } else if (boardSize == 128) {
+                        gamecalories = 400; // Example calories for 128 squares
+                    } else if (boardSize == 256) {
+                        gamecalories = 800; // Example calories for 256 squares
+                    }
+                    alert("Game Over! You burned a total of " + gamecalories + " calories during the game!");
+                    $.post("Calories_Counter.php", { calories: gamecalories }, function(response) {
+                        console.log("Calories saved: " + response);
+                    }).fail(function() {
+                        console.error("Failed to save calories.");
+                    });
                 }
             });
         </script>
