@@ -1,3 +1,8 @@
-git add srcAlfredo/PhP_Explore.php
-git commit -m "Add PhP_Explore.php to the repository"
-git push
+<?php
+ $integer2 = 2;
+ $integer3 = 3;
+ $integer4 = 4;
+ $sum = $integer2 + $integer3 + $integer4;
+ echo $sum;
+
+?>
