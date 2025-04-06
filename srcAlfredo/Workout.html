@@ -144,7 +144,26 @@
             <button type="submit" class="submit">Update</button>
         </form>
 
-        <p><a href="CaloriesTracker.html">Go to Calories Tracker</a></p>
+        <form action="Calories_Counter.php" method="POST">
+            <input type="hidden" name="laps" id="hiddenLaps" value="0">
+            <input type="hidden" name="calories" id="hiddenCalories" value="0">
+            <input type="hidden" name="time" id="hiddenTime" value="120">
+            <input type="hidden" name="distance" id="hiddenDistance" value="0">
+            <input type="hidden" name="speed" id="hiddenSpeed" value="0">
+            <button type="submit" class="submit">Send Data</button>
+        </form>
+
+        <script>
+            // Update hidden input values before form submission
+            const sendDataForm = document.querySelector('form[action="Calories_Counter.php"]');
+            sendDataForm.addEventListener('submit', () => {
+            document.getElementById('hiddenLaps').value = calorieTrackerData.laps;
+            document.getElementById('hiddenCalories').value = calorieTrackerData.calories;
+            document.getElementById('hiddenTime').value = calorieTrackerData.time;
+            document.getElementById('hiddenDistance').value = calorieTrackerData.distance;
+            document.getElementById('hiddenSpeed').value = calorieTrackerData.speed;
+            });
+        </script>
 
         <script>
             const calorieTrackerData = {
