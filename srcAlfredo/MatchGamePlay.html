@@ -221,11 +221,53 @@
             document.getElementById("timeLeft").innerHTML = "";
         }
 
-        // Load JSON data from CaloriesTracker.html
-        $.getJSON("CaloriesTracker.html", function(data) {
-            console.log(data);
-            // You can use the data here
-        });
+        function storeCalories() {
+            let level = localStorage.getItem("level");
+            let caloriesBurned = 0;
+
+            if (level === "Beginner") {
+                caloriesBurned = 5; // Example: 5 calories per game
+            } else if (level === "Intermediate") {
+                caloriesBurned = 10; // Example: 10 calories per game
+            } else if (level === "Advanced") {
+                caloriesBurned = 15; // Example: 15 calories per game
+            }
+
+            // Send the data to Calories_Counter.php
+            $.post("Calories_Counter.php", { calories: caloriesBurned }, function(response) {
+                console.log("Calories stored successfully:", response);
+            }).fail(function() {
+                console.error("Failed to store calories.");
+            });
+        }
+
+        // Call storeCalories when the game ends successfully
+        function checkMatch() {
+            let revealedCards = JSON.parse(localStorage.getItem("revealedCards"));
+            let shuffledCards = JSON.parse(localStorage.getItem("shuffledCards"));
+            let matchedCards = JSON.parse(localStorage.getItem("matchedCards"));
+            let buttons = document.querySelectorAll("#gameBoard button");
+            if (shuffledCards[revealedCards[0]] == shuffledCards[revealedCards[1]]) {
+                matchedCards.push(revealedCards[0]);
+                matchedCards.push(revealedCards[1]);
+                localStorage.setItem("matchedCards", JSON.stringify(matchedCards));
+                buttons[revealedCards[0]].style.visibility = "hidden";
+                buttons[revealedCards[1]].style.visibility = "hidden";
+            } else {
+                buttons[revealedCards[0]].innerHTML = "?";
+                buttons[revealedCards[1]].innerHTML = "?";
+            }
+            revealedCards = [];
+            localStorage.setItem("revealedCards", JSON.stringify(revealedCards));
+
+            // Check if all cards are matched
+            if (matchedCards.length === buttons.length) {
+                clearInterval(parseInt(localStorage.getItem("timer")));
+                alert("Congratulations! You've matched all the cards!");
+                storeCalories(); // Store calories burned
+                resetGame();
+            }
+        }
     </script>
 </body>
 </html>
