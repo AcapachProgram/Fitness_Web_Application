@@ -16,4 +16,17 @@ class Calories_Counter_Model {
     }
 }
 
+// Example usage
+$fitness_calories = 500; // Example fitness calories
+$match_calories = 300; // Example match calories
+$workout_calories = 200; // Example workout calories
+$workout_calories = 500;
+
+$calories_counter = new Calories_Counter_Model();
+$calories_counter->calculate_total_calories($fitness_calories, $match_calories, $workout_calories);
+// Output the result
+$total_calories = $calories_counter->calculate_total_calories($fitness_calories, $match_calories, $workout_calories);
+echo "Total Calories: " . $total_calories . "\n"; // Output: Total Calories: 1000
+
+
 ?>
