@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>JBU Library</title>
+        <link rel="stylesheet" href="JBU_Library.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+
+    <style>
+        /* Add your existing styles here */
+        .fit {
+            text-align: center;
+        }
+
+        .image-container {
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+        }
+
+        .text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+    </style>
+
+    <body>
+        <div class="fit">
+            <h1>JBU Library</h1>
+            <div class="image-container">
+                <img src="https://www.jbu.edu/assets/images/2023/08/20230831-library.jpg" alt="JBU Library">
+                <div class="text-overlay">Welcome to the JBU Library</div>
+            </div>
+
+            <button id="AddBook">Add Book</button>
+            <button id="RemoveBook">Remove Book</button>
+
+            <table> 
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name of Book</th>
+                        <th>Author</th>
+                        <th>Year Published</th>
+                        <th>img</th>
+                    </tr>
+                </thead>
+                <tbody id="bookList">
+                    <!-- Book list will be populated here -->
+                </tbody>
+            </table>
+        </div>
+
+        <script src="JBU_Library.js"></script>
+    </body>
+</html>
+
+<script>
+    // Add your JavaScript code here
+</script>
+
