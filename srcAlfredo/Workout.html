@@ -8,15 +8,31 @@
     </head>
 
     <style>
-        /* Add your existing styles here */
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
         .fit {
             text-align: center;
+            margin-top: 20px;
+            font-size: 2rem;
+            color: #4CAF50;
         }
 
         .image-container {
             position: relative;
             text-align: center;
-            color: white;
+            margin: 20px auto;
+            max-width: 800px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .image-container img {
@@ -26,12 +42,12 @@
 
         .text-overlay {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px 15px;
             border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
         }
 
         .text-overlay.laps {
@@ -62,34 +78,40 @@
 
         form {
             text-align: center;
-            margin-top: 20px;
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 500px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         label {
             display: block;
             margin-top: 10px;
+            font-weight: bold;
         }
 
-        input[type="number"] {
-            width: 100px;
-            padding: 5px;
+        input[type="number"], select {
+            width: calc(100% - 20px);
+            padding: 10px;
             margin-top: 5px;
-        }
-
-        select {
-            width: 100px;
-            padding: 5px;
-            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
         }
 
         button.submit {
             padding: 10px 20px;
-            margin-top: 10px;
+            margin-top: 20px;
             background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
         }
 
         button.submit:hover {
@@ -99,19 +121,18 @@
         p {
             text-align: center;
             margin-top: 20px;
+            font-size: 1rem;
         }
 
         a {
             color: #4CAF50;
             text-decoration: none;
+            font-weight: bold;
         }
 
         a:hover {
             text-decoration: underline;
         }
-
-        
-        
     </style>
 
     <body>
