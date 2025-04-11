@@ -219,7 +219,6 @@
                     } else if (boardSize == 256) {
                         gamecalories = 800; // Example calories for 256 squares
                     }
-                    alert("Game Over! You burned a total of " + gamecalories + " calories during the game!");
                     $.post("Calories_Counter.php", { calories: gamecalories }, function(response) {
                         console.log("Calories saved: " + response);
                     }).fail(function() {
