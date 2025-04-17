@@ -7,81 +7,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <style>
-    body {
-        background-color: #f0f8ff; /* Light blue background for a calming effect */
-        font-family: Arial, sans-serif; /* Modern and clean font */
-        margin: 0;
-        padding: 0;
-    }
-    .fit {
-        background-image: url("C:/Users/acapa/OneDrive/GPA-Transcript/Pictures/Fitness.jpeg");
-        background-size: cover; /* Cover the entire div */
-        background-position: center;
-        padding: 20px;
-        text-align: center;
-    }
-    h1 {
-        font-family: 'Georgia', serif;
-        font-size: 50px;
-        color: #ff4500; /* Bright orange for emphasis */
-        margin: 20px 0;
-    }
-    p {
-        font-family: 'Verdana', sans-serif;
-        font-size: 18px;
-        color: #4b0082; /* Indigo for a professional look */
-        margin: 10px 0;
-    }
-    select {
-        font-family: 'Verdana', sans-serif;
-        font-size: 16px;
-        color: #000;
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-    .play {
-        font-family: 'Verdana', sans-serif;
-        font-size: 18px;
-        color: #fff;
-        background-color: #32cd32; /* Lime green for a positive action */
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-    .play:hover {
-        background-color: #228b22; /* Darker green on hover */
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-    }
-    th, td {
-        border: 2px solid #000;
-        padding: 10px;
-        text-align: center;
-        font-size: 16px;
-    }
-    th {
-        background-color: #add8e6; /* Light blue for headers */
-        font-weight: bold;
-    }
-    td button {
-        font-size: 16px;
-        padding: 10px;
-        background-color: #87ceeb; /* Sky blue for buttons */
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-    td button:hover {
-        background-color: #4682b4; /* Steel blue on hover */
-        color: #fff;
-    }
+    /* Existing styles */
 </style>
 <body>
     <div class="fit">
@@ -93,6 +19,8 @@
             <option value="Advanced">Advanced</option>
         </select>
         <button class="play" onclick="startGame()">START</button>
+        <br><br>
+        <a href="CaloriesTracker.html" class="play">Go to Calories Tracker</a>
     </div>
 
     <p>Match the cards before time runs out!</p>
@@ -167,6 +95,7 @@
             if (matchedCards.length === buttons.length) {
                 clearInterval(parseInt(localStorage.getItem("timer")));
                 alert("Congratulations! You've matched all the cards!");
+                storeCalories(); // Store calories burned
                 resetGame();
             }
         }
@@ -277,34 +206,6 @@
             }).fail(function() {
                 console.error("Failed to store calories.");
             });
-        }
-
-        // Call storeCalories when the game ends successfully
-        function checkMatch() {
-            let revealedCards = JSON.parse(localStorage.getItem("revealedCards"));
-            let shuffledCards = JSON.parse(localStorage.getItem("shuffledCards"));
-            let matchedCards = JSON.parse(localStorage.getItem("matchedCards"));
-            let buttons = document.querySelectorAll("#gameBoard button");
-            if (shuffledCards[revealedCards[0]] == shuffledCards[revealedCards[1]]) {
-                matchedCards.push(revealedCards[0]);
-                matchedCards.push(revealedCards[1]);
-                localStorage.setItem("matchedCards", JSON.stringify(matchedCards));
-                buttons[revealedCards[0]].style.visibility = "hidden";
-                buttons[revealedCards[1]].style.visibility = "hidden";
-            } else {
-                buttons[revealedCards[0]].innerHTML = "?";
-                buttons[revealedCards[1]].innerHTML = "?";
-            }
-            revealedCards = [];
-            localStorage.setItem("revealedCards", JSON.stringify(revealedCards));
-
-            // Check if all cards are matched
-            if (matchedCards.length === buttons.length) {
-                clearInterval(parseInt(localStorage.getItem("timer")));
-                alert("Congratulations! You've matched all the cards!");
-                storeCalories(); // Store calories burned
-                resetGame();
-            }
         }
     </script>
 </body>
