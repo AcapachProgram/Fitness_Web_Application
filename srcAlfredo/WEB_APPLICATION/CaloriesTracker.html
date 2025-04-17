@@ -13,10 +13,13 @@
         <script>
             async function fetchCalories() {
                 const workoutCalories = await fetchAndExtractCalories('./Workout.html');
+                
+                // Fetch calories from either MatchGamePlay.html or FitnessBoardGamePlay.html
                 const matchGameCalories = await fetchAndExtractCalories('./MatchGamePlay.html');
                 const fitnessBoardGameCalories = await fetchAndExtractCalories('./FitnessBoardGamePlay.html');
+                const gameCalories = Math.max(matchGameCalories, fitnessBoardGameCalories);
 
-                const totalCalories = workoutCalories + matchGameCalories + fitnessBoardGameCalories;
+                const totalCalories = workoutCalories + gameCalories;
                 document.getElementById('totalCalories').innerText = totalCalories + ' kcal';
             }
 
