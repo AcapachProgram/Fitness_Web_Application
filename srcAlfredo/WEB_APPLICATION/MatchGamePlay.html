@@ -7,7 +7,110 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <style>
-    /* Existing styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    .fit {
+        text-align: center;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 2rem;
+        color: #007BFF;
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-size: 1rem;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    select {
+        padding: 5px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .play {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 20px;
+        font-size: 1rem;
+        color: #fff;
+        background-color: #007BFF;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .play:hover {
+        background-color: #0056b3;
+    }
+
+    p {
+        font-size: 1rem;
+        margin: 10px 0;
+    }
+
+    #gameBoard {
+        margin-top: 20px;
+        display: grid;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    #gameBoard table {
+        border-collapse: collapse;
+    }
+
+    #gameBoard td {
+        padding: 5px;
+    }
+
+    #gameBoard button {
+        width: 60px;
+        height: 60px;
+        font-size: 1rem;
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #gameBoard button:hover {
+        background-color: #0056b3;
+    }
+
+    #timeLeft {
+        font-weight: bold;
+        color: #FF0000;
+    }
+
+    a.play {
+        display: block;
+        margin-top: 10px;
+        text-align: center;
+    }
 </style>
 <body>
     <div class="fit">
