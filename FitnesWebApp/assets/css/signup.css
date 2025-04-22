@@ -1,0 +1,19 @@
+
+body{
+    background-image: url(../images/hero-banner.jpg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Frosted Glass look */
+
+.signup-container{
+    margin-top: 150px;
+    height: 700px;
+    width: 500px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: saturate(180%) blur(10px);
+    border-radius: 20px;
+}
+
