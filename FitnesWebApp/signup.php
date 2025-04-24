@@ -90,6 +90,26 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <a href="#" class="navbar-link" data-nav-link>Contact</a>
           </li>
 
+            <li class="navbar-item">
+                <a href="TakingQuiz.php" class = "navbar-link" data-nav-link>Quiz</a>
+            </li>
+
+            <li class="navbar-item">
+                <a href="DoingWorkout.php" class = "navbar-link" data-nav-link>Workout</a>
+            </li>
+
+            <li class="navbar-item">
+                <a href="Match.php" class = "navabar-link" data-nax-link>Matching</a>
+            </li>
+
+            <li class="navbar-item">
+                <a href="BoardGamePlay.php" class = "navabar-link" data-nax-link>Race</a>
+            </li>
+
+            <li class="navbar-item">
+                <a href="Calories_Counter.php" class = "navabar-link" data-nax-link>Calories</a>
+            </li>
+
         </ul>
 
       </nav>
