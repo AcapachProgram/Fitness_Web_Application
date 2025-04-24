@@ -3,33 +3,29 @@ session_start();
 
 include("db-connection.php");
 include("functions.php");
-$wrong_credentials = false; // used to display the message in the form instead outside of it
-
-if(isset($_SESSION['user_id'])) // Logs a user out of the session 
-{
-	unset($_SESSION['user_id']);
-}
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $username = trim($_POST['username']); //this will be the email
+    $username = trim($_POST['username']);
+    $client_email = trim($_POST['email']);
     $password = trim($_POST['password']);
     
-    if (!empty($username) && !empty($password)) {
-        $query = "SELECT * FROM users_tab WHERE email = '$username' LIMIT 1";
-        $result = mysqli_query($con, $query);
+    if (!empty($username) && !empty($client_email) && !empty($password)) {
+        $user_id = random_num(4);
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Secure password storage
+        $role = "customer";
+        $created_at = date("Y-m-d H:i:s");
         
-        if ($result && mysqli_num_rows($result) > 0) {
-            $user_data = mysqli_fetch_assoc($result);
-            
-            if (password_verify($password, $user_data['password'])) { // Secure password verification
-                $_SESSION['user_id'] = $user_data['user_id'];
-                header("Location: index.php");
-                die;    
-            }
-        }    
-        $wrong_credentials = true;
+        $query = "INSERT INTO users_tab (user_id, username, email, password, role, created_at) 
+                  VALUES ('$user_id', '$username', '$client_email', '$hashed_password', '$role', '$created_at')";
+        
+        if (mysqli_query($con, $query)) {
+            header("Location: signup.php");
+            die;
+        } else {
+            echo "Error: " . mysqli_error($con);
+        }
     } else {
-        echo "Please enter a valid email and password!";
+        echo "Please enter a valid username, email, and password!";
     }
 }
 ?>
@@ -109,13 +105,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <div class="signup-container">
         <form method="post">
-          <h2>Login</h2>
-          <div class="input-field">
+        <h2>Login</h2>
+        <div class="input-field">
 
             <label>Enter your email</label>
-            <input type="text" name="username" required>
+            <input type="text" name="email" required>
           
-          </div>
+        </div>
+
+        <div class="input-field">
+
+          <label>Enter your username</label>
+          <input type="text" name="username" required>
+          
+        </div>
         
         <div class="input-field">
 
@@ -124,23 +127,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
           
         </div>
 
-        <?php
-          if ($wrong_credentials) {
-            echo"<h5 style= text-align:center; color:hsl(165, 77%, 15%); >Wrong Email or Password!</h5>";
-          }
-        ?>
         
         <div class="login">
 
-          <button type="submit" class="login-btn">Log In</button>
+          <button type="submit" class="login-btn">Sign Up</button>
 
         </div>
         
         <div class="register">
-          <p>Don't have an account? <a id="register" href="register.php">Register</a></p>
-        </div>
-        <div class="forget">
-          <a href="forgotpassword.php">Forgot password?</a> 
+          <p>Already have an account? <a id="register" href="signup.php">Login</a></p>
         </div>
         </form>
     </div>

@@ -67,6 +67,7 @@
           <li class="navbar-item">
             <a href="#" class="navbar-link" data-nav-link>Contact</a>
           </li>
+          
 
         </ul>
 
