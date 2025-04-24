@@ -1,7 +1,37 @@
 <?php
 session_start();
-require("db-connection.php");
 
+include("db-connection.php");
+include("functions.php");
+$wrong_credentials = false; // used to display the message in the form instead outside of it
+
+if(isset($_SESSION['user_id'])) // Logs a user out of the session 
+{
+	unset($_SESSION['user_id']);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $username = trim($_POST['username']); //this will be the email
+    $password = trim($_POST['password']);
+    
+    if (!empty($username) && !empty($password)) {
+        $query = "SELECT * FROM users_tab WHERE email = '$username' LIMIT 1";
+        $result = mysqli_query($con, $query);
+        
+        if ($result && mysqli_num_rows($result) > 0) {
+            $user_data = mysqli_fetch_assoc($result);
+            
+            if (password_verify($password, $user_data['password'])) { // Secure password verification
+                $_SESSION['user_id'] = $user_data['user_id'];
+                header("Location: MainPage.php");
+                die;    
+            }
+        }    
+        $wrong_credentials = true;
+    } else {
+        echo "Please enter a valid email and password!";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -78,8 +108,40 @@ require("db-connection.php");
 
 
     <div class="signup-container">
-        <form action="">
-            
+        <form method="post">
+          <h2>Login</h2>
+          <div class="input-field">
+
+            <label>Enter your email</label>
+            <input type="text" name="username" required>
+          
+          </div>
+        
+        <div class="input-field">
+
+          <label>Enter your password</label>
+          <input type="password" name="password" required>
+          
+        </div>
+
+        <?php
+          if ($wrong_credentials) {
+            echo"<p style=color:#fff;>Wrong Email or Password!</p>";
+          }
+        ?>
+        
+        <div class="login">
+
+          <button type="submit" class="login-btn">Log In</button>
+
+        </div>
+        
+        <div class="register">
+          <p>Don't have an account? <a id="register" href="signup.php">Register</a></p>
+        </div>
+        <div class="forget">
+          <a href="forgotpassword.php">Forgot password?</a> 
+        </div>
         </form>
     </div>
  
