@@ -1,70 +1,66 @@
-
-body{
-    background-image: url(../images/hero-banner.jpg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body {
+  background-image: url(../images/hero-banner.jpg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Frosted Glass look */
 
-.signup-container{
-    margin-top: 150px;
-    height: 500px;
-    width: 500px;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: saturate(180%) blur(10px);
-    border-radius: 20px;
+.signup-container {
+  margin-top: 150px;
+  height: 500px;
+  width: 500px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-radius: 20px;
 }
 
-h2{
-    text-align: center;
-    padding: 30px;
+h2 {
+  text-align: center;
+  padding: 30px;
 }
 
-.forget{
-    text-align: center;
-    text-decoration: underline;
+.forget {
+  text-align: center;
+  text-decoration: underline;
 }
 
-.register{
-    text-align: center;
-    margin: 20px;
+.register {
+  text-align: center;
+  margin: 20px;
 }
-#register{
-    display: inline-block;
-    text-decoration: underline;
-}
-
-.input-field{
-    margin: 20px;
+#register {
+  display: inline-block;
+  text-decoration: underline;
 }
 
-.login{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
-    
+.input-field {
+  margin: 20px;
 }
 
-.login-btn{
-    width: 100vw;
-    border-radius: 20px;
-    background-color: hsl(38, 100%, 50%);
-    height: 50px;
-    color: white;
-    font-size: large;
-    font-weight: bolder;
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
 }
 
-input{
-    border-bottom: 2px solid hsl(38, 100%, 50%);
-    padding: 2px;
-    
+.login-btn {
+  width: 100vw;
+  border-radius: 20px;
+  background-color: hsl(38, 100%, 50%);
+  height: 50px;
+  color: white;
+  font-size: large;
+  font-weight: bolder;
+}
+
+input {
+  border-bottom: 2px solid hsl(38, 100%, 50%);
+  padding: 2px;
 }
 
 input:focus {
-    outline: none;
-    
+  outline: none;
 }
